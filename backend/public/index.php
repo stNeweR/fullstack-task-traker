@@ -1,6 +1,9 @@
 <?php 
 
-echo 'hello world!';
+define('APP_PATH', __DIR__);
 
-phpinfo();
+require_once(APP_PATH. '/../vendor/autoload.php');
 
+use App\Test;
+
+Test::hello();
