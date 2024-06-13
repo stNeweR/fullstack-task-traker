@@ -1,9 +1,9 @@
 <?php 
-
 define('APP_PATH', __DIR__);
 
-require_once(APP_PATH. '/../vendor/autoload.php');
+require_once APP_PATH. '/../vendor/autoload.php';
 
-use App\Test;
+use Core\App;
 
-Test::hello();
+$app = new App;
+$app->run();
