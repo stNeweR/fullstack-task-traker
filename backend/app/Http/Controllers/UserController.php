@@ -1,8 +1,10 @@
 <?php 
 
-namespace App\Http;
+namespace App\Http\Controllers;
 
-class UserController
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller
 {
     public function test()
     {

@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\UserController;
-use Core\Router\Router;
+use App\Http\Controllers\UserController;
+use Kernel\Router\Route;
 
-Router::get('/', [UserController::class, 'test']);
-Router::get('/new', [UserController::class, 'test2']);
+return [
+    Route::get('/', [UserController::class, 'test']),
+    Route::get('/new', [UserController::class, 'test2']),
+];
