@@ -1,6 +1,9 @@
-<?php 
+<?php
+define('APP_PATH', __DIR__);
 
-echo 'hello world!';
+require_once APP_PATH. '/../vendor/autoload.php';
 
-phpinfo();
+use Kernel\App;
 
+$app = new App;
+$app->run();
