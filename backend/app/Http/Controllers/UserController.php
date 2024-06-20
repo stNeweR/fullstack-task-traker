@@ -11,7 +11,7 @@ class UserController extends Controller
         dd('test!');
     }
 
-    public function test2()
+    public function test2($id)
     {
         dd('test2!');
     }
