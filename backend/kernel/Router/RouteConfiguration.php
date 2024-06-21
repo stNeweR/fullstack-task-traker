@@ -12,7 +12,7 @@ class RouteConfiguration
 
     public function __construct(string $route, string $controller, string $action)
     {
-        $this->route = $route;
+        $this->route = '/api' . $route;
         $this->controller = $controller;
         $this->action = $action;
     }
@@ -36,7 +36,7 @@ class RouteConfiguration
 
     public function getRoute(): string
     {
-        return '/api' . $this->route;
+        return $this->route;
     }
 
     public function getAction(): string
