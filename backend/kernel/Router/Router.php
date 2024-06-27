@@ -2,36 +2,48 @@
 
 namespace Kernel\Router;
 
+use Kernel\Router\RouteDispatcher;
+use Kernel\Router\RouteConfiguration;
+use Kernel\Helpers\Str;
+
 class Router
-{
+{  
+    private static ?Router $instance = null;
+
     private array $routes = [
         'GET' => [],
         'POST' => [],
+        'PUT' => [],
+        'DELETE' => []
     ];
-
-    public function __construct()
+    
+    public static function getInstance(): Router
     {
-        $this->initRoutes();
+        if (self::$instance === null) {
+            self::$instance = new self;
+        }
+        return self::$instance;
     }
 
     public function dispatch(string $uri, string $method)
     {
-        dump($uri);
-        dump($this->routes[$method]);
-        foreach($this->routes[$method] as $route) {
-            [$controller, $action] = $route->getAction();
-
-            $controller = new $controller();
-            call_user_func([$controller, $action]);
+        require_once '../routes/routes.php';
+        $dispatcher = new RouteDispatcher();
+        foreach($this->routes[$method] as $routeConfiguration) {
+            $dispatcher->process($routeConfiguration, $uri);
         }
+        $this->notFoundRoute();
     }
 
-    public function initRoutes()
+    public function initRoute(string $method, RouteConfiguration $route)
     {
-        $routes = require_once APP_PATH . '/../routes/routes.php';
+        $this->routes[$method][] = $route;
+    }
 
-        foreach ($routes as $route) {
-            $this->routes[$route->getMethod()][$route->getUri()] = $route;
-        }
+    public function notFoundRoute()
+    {
+        http_response_code(404);
+        echo "404!";
+        die();
     }
 }

@@ -11,7 +11,7 @@ class App
     {
         $request = Request::createGlobals();
 
-        $router = new Router;
+        $router = Router::getInstance();
 
         $router->dispatch(
             $request->getServerValue('request_uri'), 

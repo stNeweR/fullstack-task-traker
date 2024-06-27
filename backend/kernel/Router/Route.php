@@ -1,38 +1,37 @@
-<?php 
+<?php
 
 namespace Kernel\Router;
 
+use Kernel\Router\RouteConfiguration;
+use Kernel\Router\Router;
+
 class Route
 {
-    public function __construct(
-        private string $method,
-        private string $uri,
-        private array $action,
-    ) {
-    }
-    
-    public static function get(string $uri, array $action): static
+    public static function get(string $uri, array $action): RouteConfiguration
     {
-        return new static('GET', $uri, $action);
+        $routeConfiguration = new RouteConfiguration($uri, $action[0], $action[1]);
+        Router::getInstance()->initRoute('GET', $routeConfiguration);
+        return $routeConfiguration;
     }
 
-    public static function post(string $uri, array $action): static
+    public static function post(string $uri, array $action): RouteConfiguration
     {
-        return new static('POST', $uri, $action);
+        $routeConfiguration = new RouteConfiguration($uri, $action[0], $action[1]);
+        Router::getInstance()->initRoute('POST', $routeConfiguration);
+        return $routeConfiguration;
     }
 
-    public function getMethod(): string
+    public static function put(string $uri, array $action): RouteConfiguration
     {
-        return $this->method;
+        $routeConfiguration = new RouteConfiguration($uri, $action[0], $action[1]);
+        Router::getInstance()->initRoute('PUT', $routeConfiguration);
+        return $routeConfiguration;
     }
 
-    public function getUri(): string
+    public static function delete(string $uri, array $action): RouteConfiguration 
     {
-        return $this->uri;
-    }
-
-    public function getAction(): array
-    {
-        return $this->action;
+        $routeConfiguration = new RouteConfiguration($uri, $action[0], $action[1]);
+        Router::getInstance()->initRoute('DELETE', $routeConfiguration);
+        return $routeConfiguration;
     }
 }
