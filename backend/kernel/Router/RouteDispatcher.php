@@ -4,6 +4,8 @@ namespace Kernel\Router;
 
 use Kernel\Helpers\Str;
 use Kernel\Router\RouteConfiguration;
+use Symfony\Component\VarDumper\Command\ServerDumpCommand;
+use Exception;
 
 class RouteDispatcher
 {
@@ -66,7 +68,7 @@ class RouteDispatcher
     public function render()
     {
         $ClassName = $this->route->getController();
-        $action = $this->route->getAction();
+        $action = $this->route->getAction();   
 
         print_r((new $ClassName)->$action(...$this->requestParamMap));
         die();
