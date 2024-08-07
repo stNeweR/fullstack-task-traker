@@ -15,9 +15,10 @@ services:
     build: 
       context: .
       dockerfile: docker/php/Dockerfile
-    image: php:8.3-fpm
     volumes:
       - ./:/var/www
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   db:
     image: mysql:8.0
